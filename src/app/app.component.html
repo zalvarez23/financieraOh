@@ -55,23 +55,21 @@
     <br>
     <hr class="my-4">
 
-    <fieldset class="tableFilter">
+    <div class="tableFilter">
       <legend>LISTA DE CLIENTES</legend>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col" class="text-center">Fecha de Nacimiento</th>
-            <th scope="col" class="text-center">Fecha Promedio Muerte</th>
+            <th scope="col" class="text-center">F. Nacimiento</th>
+            <th scope="col" class="text-center">F. Muerte</th>
             <th scope="col">Edad</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of listPerson;index as i">
-            <th scope="row">{{i+1}}</th>
             <td>{{item.nombre}}</td>
             <td>{{item.apellido}}</td>
             <td class="text-center">{{item.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>
@@ -83,15 +81,13 @@
         </tbody>
         <tfoot>
           <tr>
-            <th scope="col">#</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col" class="text-center">Promedio de Edad</th>
-            <th scope="col">{{promedioEdad}}</th>
+            <th scope="col">{{promedioEdad.toFixed(2)}}</th>
           </tr>
           <tr>
-            <th scope="col">#</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -100,7 +96,7 @@
           </tr>
         </tfoot>
       </table>
-    </fieldset>
+    </div>
   </div>
 </div>
 <button (click)='getPdf()'>
