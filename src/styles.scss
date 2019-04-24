@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+.classKevin{
+    background-color: #dc3545;
+    .jumbotron{
+        margin-top: 25px;
+        h1{
+            color :#e25e6b;
+        }
+    }
+
+}
+
+.contentRegistro{
+    input {
+        font-size: 11px !important;
+        font-family: GillSans, Calibri, Trebuchet, sans-serif;
+        color: #292a2b;
+        width: 100% !important;
+    }
+    label {
+        font-size: 11px;
+        font-family: GillSans, Calibri, Trebuchet, sans-serif;
+    }
+    legend {
+        font-size: 12px !important;
+        font-family: GillSans, Calibri, Trebuchet, sans-serif;
+        color: #2c5ca9;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    .contentbutton{
+        margin-top: 10px;
+    }
+} 
+
+
