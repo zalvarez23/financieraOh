@@ -1,28 +1,30 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container classKevin">
-  <div class="jumbotron">
-    <h1 class="display-5 text-center">Reto Financiera OH!</h1>
-  </div>
+  <img src="../assets/financieraoh.png" alt="">
+
 </div>
+<hr class="my-4">
+
 <div class="container ">
   <div class="contentRegistro">
     <fieldset>
       <legend>INGRESO DE DATOS PARA CREACION DE CLIENTE</legend>
-      <hr class="my-4">
       <div class="row">
         <div class="col-lg-3 col-md-6 col-md-6 col-sm-12">
-          <label for="txtNombre" >NOMBRE</label>
-          <input type="text" placeholder="Ingresar Nombre . ."  [(ngModel)]="objPersona.nombre" class="form-control" id="txtNombre">
+          <label for="txtNombre">NOMBRE</label>
+          <input type="text" placeholder="Ingresar Nombre . ." [(ngModel)]="objPersona.nombre" class="form-control"
+            id="txtNombre">
         </div>
 
         <div class="col-lg-3 col-md-6 col-sm-12">
-          <label for="txtApellido" >APELLIDO</label>
-          <input type="text" placeholder="Ingresar Apellido . ." [(ngModel)]="objPersona.apellido" class="form-control" id="txtApellido" maxlength="10">
+          <label for="txtApellido">APELLIDO</label>
+          <input type="text" placeholder="Ingresar Apellido . ." [(ngModel)]="objPersona.apellido" class="form-control"
+            id="txtApellido" maxlength="10">
         </div>
 
         <div class="col-lg-3 col-md-6 col-sm-12">
-          <label for="txtEdad" >EDAD</label>
-          <input type="number" placeholder="Ingresar Edad . ." [(ngModel)]="objPersona.edad" class="form-control" id="txtEdad">
+          <label for="txtEdad">EDAD</label>
+          <input type="number" placeholder="Ingresar Edad . ." [(ngModel)]="objPersona.edad" class="form-control"
+            id="txtEdad">
         </div>
 
         <div class="col-lg-3 col-md-6" col-sm-12>
@@ -30,31 +32,78 @@
           <input type="date" [(ngModel)]="objPersona.fechaNacimiento" class="form-control" id="txtFechaNac">
         </div>
       </div>
-
+      <br>
       <div class="row contentbutton">
+        <div class="col-lg-3 col-md-0"></div>
         <div class="col-lg-3">
           <button type="button" class="btn btn-danger btn-block" (click)="savePersonal()">Registrar</button>
         </div>
         <div class="col-lg-3">
           <button type="button" class="btn btn-info btn-block" (click)="clearObjPersonal()">Cancelar</button>
         </div>
+        <div class="col-lg-3 col-md-0"></div>
       </div>
       <br>
       <div class="text-center" *ngIf="loader">
-          <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Guardando ...</span>
-            </div>
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Guardando ...</span>
+        </div>
       </div>
-  
+
+    </fieldset>
+    <br>
+    <br>
+    <hr class="my-4">
+
+    <fieldset class="tableFilter">
+      <legend>LISTA DE CLIENTES</legend>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col" class="text-center">Fecha de Nacimiento</th>
+            <th scope="col" class="text-center">Fecha Promedio Muerte</th>
+            <th scope="col">Edad</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listPerson;index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.nombre}}</td>
+            <td>{{item.apellido}}</td>
+            <td class="text-center">{{item.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{item.fechaMuerte | date: 'dd/MM/yyyy'}}</td>
+            <td>{{item.edad}}</td>
+
+          </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col" class="text-center">Promedio de Edad</th>
+            <th scope="col">{{promedioEdad}}</th>
+          </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col" class="text-center">Desviacion Estandas</th>
+            <th scope="col">{{desviacionEstandar.toFixed(2)}}</th>
+          </tr>
+        </tfoot>
+      </table>
     </fieldset>
   </div>
 </div>
 <button (click)='getPdf()'>
   GET PDF
 </button>
-<ul>
-  <li *ngFor='let item of listPerson'>
-    {{item.nombre}}
-  </li>
-</ul>
 <router-outlet></router-outlet>

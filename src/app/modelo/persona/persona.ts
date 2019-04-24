@@ -12,9 +12,9 @@ export class persona implements objPersona{
 }
 
 export interface objPersona{
-    nombre:string,
-    apellido : string,
-    edad:number,
-    fechaNacimiento:string
+    nombre ?:string,
+    apellido ?: string,
+    edad ?:number,
+    fechaNacimiento ?:string
 }
 

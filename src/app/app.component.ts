@@ -3,8 +3,11 @@ import { persona } from './modelo/persona/persona';
 import { objPersona } from './modelo/persona/persona';
 import * as firebase from 'firebase';
 import * as jsPDF from 'jspdf'
+import { Observable } from 'rxjs';
+
 
 const settings = {timestampsInSnapshots: true};
+const anioPromedioVida = 72;
 var config = {
   apiKey: "AIzaSyDWukyU_zxdoSdAmR8AmvMOQJBVQeqNARw",
   authDomain: "financieraoh-5a7d8.firebaseapp.com",
@@ -21,17 +24,44 @@ var config = {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'my-app';
-  listPerson:Array<persona> = [];
   objPersona = new persona('','',0,'');
+  listPerson:Array<persona> = []; 
   loader:boolean = false;
+  promedioEdad:number = 0;
+  desviacionEstandar:number = 0;
 
-  constructor() { }
-
+  constructor() { 
+    
+  }
   ngOnInit() {
     firebase.initializeApp(config);
+    firebase.database().ref().on('value',res =>{
+      this.listPerson = [];
+      this.promedioEdad = 0;
+      res.forEach(item => {
+        this.promedioEdad += item.val().edad;
+        this.listPerson.push(item.val());
+      });
+      this.promedioEdad = this.promedioEdad / this.listPerson.length;
+      // FUNCION PARA GENERAR LA DESVIACION ESTANDAR
+
+      this.listPerson.forEach(res=>{
+        this.desviacionEstandar += (Math.pow(res.edad - this.promedioEdad,2));
+        // calculamos fecha promedio de vida
+        var fechaPromedioMuerte;
+        var fechaEdad = res.fechaNacimiento.split('-');
+        fechaPromedioMuerte = (parseFloat(fechaEdad[0]) + anioPromedioVida) + '-' + fechaEdad [1] + '-' + fechaEdad [2];
+        res['fechaMuerte'] = fechaPromedioMuerte;
+      });
+      this.desviacionEstandar = Math.sqrt(this.desviacionEstandar / this.listPerson.length)
+      
+    });
   }
+
   savePersonal(){
+    
     this.loader = true;
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
@@ -42,6 +72,7 @@ export class AppComponent {
       this.loader = false;
     }, 1500);
   }
+
   clearObjPersonal(){
     this.objPersona.apellido = '';
     this.objPersona.nombre = '';

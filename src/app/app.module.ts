@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponenteComponent } from './home-componente/home-componente.component';
 import { FormsModule } from '@angular/forms';
+import { FirestoreSettingsToken} from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

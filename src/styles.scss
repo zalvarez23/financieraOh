@@ -1,16 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 .classKevin{
     background-color: #dc3545;
-    .jumbotron{
-        margin-top: 25px;
-        h1{
-            color :#e25e6b;
-        }
+    margin-top: 25px;
+    img{
+        width: 100%;
+        height: 350px;
     }
-
 }
 
 .contentRegistro{
+    margin-top: 20px;
+
+    fieldset{
+        border: 2px solid #dc3545 !important;
+        padding: 30px !important;
+        border-radius: 4px !important;
+    }
     input {
         font-size: 11px !important;
         font-family: GillSans, Calibri, Trebuchet, sans-serif;
@@ -27,10 +32,38 @@
         color: #2c5ca9;
         font-weight: 600;
         letter-spacing: 1px;
+        text-align: center;
+        text-decoration: underline;
     }
     .contentbutton{
         margin-top: 10px;
     }
-} 
+}
+.tableFilter table thead th {
+    font-size: 11px !important;
+    font-family: GillSans, Calibri, Trebuchet, sans-serif !important;
+    color: white !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.tableFilter table thead {
+    background-color: #dc3545;
+}
+
+
+    .tableFilter table tbody td {
+        font-size: 13px;
+        font-family: GillSans, Calibri, Trebuchet, sans-serif;
+        padding: 5px 8px;
+    }
+
+.tableFilter tbody {
+    height: 300px; /* Just for the demo          */
+    overflow-y: auto; /* Trigger vertical scroll    */
+    overflow-x: hidden; /* Hide the horizontal scroll */
+}
 
 
