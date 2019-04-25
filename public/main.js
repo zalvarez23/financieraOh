@@ -63,7 +63,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container classKevin\">\n  <img src=\"../assets/financieraoh.png\" alt=\"\">\n\n</div>\n<hr class=\"my-4\">\n\n<div class=\"container \">\n  <div class=\"contentRegistro\">\n    <fieldset>\n      <legend>INGRESO DE DATOS PARA CREACION DE CLIENTE</legend>\n      <div class=\"row\">\n        <div class=\"col-lg-3 col-md-6 col-md-6 col-sm-12\">\n          <label for=\"txtNombre\">NOMBRE</label>\n          <input type=\"text\" placeholder=\"Ingresar Nombre . .\" [(ngModel)]=\"objPersona.nombre\" class=\"form-control\"\n            id=\"txtNombre\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6 col-sm-12\">\n          <label for=\"txtApellido\">APELLIDO</label>\n          <input type=\"text\" placeholder=\"Ingresar Apellido . .\" [(ngModel)]=\"objPersona.apellido\" class=\"form-control\"\n            id=\"txtApellido\" maxlength=\"10\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6 col-sm-12\">\n          <label for=\"txtEdad\">EDAD</label>\n          <input type=\"number\" placeholder=\"Ingresar Edad . .\" [(ngModel)]=\"objPersona.edad\" class=\"form-control\"\n            id=\"txtEdad\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6\" col-sm-12>\n          <label for=\"txtFechaNac\">FECHA DE NACIMIENTO</label>\n          <input type=\"date\" [(ngModel)]=\"objPersona.fechaNacimiento\" class=\"form-control\" id=\"txtFechaNac\">\n        </div>\n      </div>\n      <br>\n      <div class=\"row contentbutton\">\n        <div class=\"col-lg-3 col-md-0\"></div>\n        <div class=\"col-lg-3\">\n          <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"savePersonal()\">Registrar</button>\n        </div>\n        <div class=\"col-lg-3\">\n          <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"clearObjPersonal()\">Cancelar</button>\n        </div>\n        <div class=\"col-lg-3 col-md-0\"></div>\n      </div>\n      <br>\n      <div class=\"text-center\" *ngIf=\"loader\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n          <span class=\"sr-only\">Guardando ...</span>\n        </div>\n      </div>\n\n    </fieldset>\n    <br>\n    <br>\n    <hr class=\"my-4\">\n\n    <div class=\"tableFilter\">\n      <legend>LISTA DE CLIENTES</legend>\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Nombre</th>\n            <th scope=\"col\">Apellido</th>\n            <th scope=\"col\" class=\"text-center\">F. Nacimiento</th>\n            <th scope=\"col\" class=\"text-center\">F. Muerte</th>\n            <th scope=\"col\">Edad</th>\n\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of listPerson;index as i\">\n            <td>{{item.nombre}}</td>\n            <td>{{item.apellido}}</td>\n            <td class=\"text-center\">{{item.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>\n            <td class=\"text-center\">{{item.fechaMuerte | date: 'dd/MM/yyyy'}}</td>\n            <td>{{item.edad}}</td>\n\n          </tr>\n\n        </tbody>\n        <tfoot>\n          <tr>\n            <th scope=\"col\"></th>\n            <th scope=\"col\"></th>\n            <th scope=\"col\"></th>\n            <th scope=\"col\" class=\"text-center\">Promedio de Edad</th>\n            <th scope=\"col\">{{promedioEdad.toFixed(2)}}</th>\n          </tr>\n          <tr>\n            <th scope=\"col\"></th>\n            <th scope=\"col\"></th>\n            <th scope=\"col\"></th>\n            <th scope=\"col\" class=\"text-center\">Desviacion Estandas</th>\n            <th scope=\"col\">{{desviacionEstandar.toFixed(2)}}</th>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n<button (click)='getPdf()'>\n  GET PDF\n</button>\n<router-outlet></router-outlet>"
+module.exports = "<div class=\"container classKevin\">\n  <img src=\"../assets/financieraoh.png\" alt=\"\">\n\n</div>\n<hr class=\"my-4\">\n\n<div class=\"container \">\n  <div class=\"contentRegistro\">\n    <fieldset>\n      <legend>INGRESO DE DATOS PARA CREACION DE CLIENTE</legend>\n      <div class=\"row\">\n        <div class=\"col-lg-3 col-md-6 col-md-6 col-sm-12\">\n          <label for=\"txtNombre\">NOMBRE</label>\n          <input type=\"text\" placeholder=\"Ingresar Nombre . .\" [(ngModel)]=\"objPersona.nombre\" class=\"form-control\"\n            id=\"txtNombre\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6 col-sm-12\">\n          <label for=\"txtApellido\">APELLIDO</label>\n          <input type=\"text\" placeholder=\"Ingresar Apellido . .\" [(ngModel)]=\"objPersona.apellido\" class=\"form-control\"\n            id=\"txtApellido\" maxlength=\"10\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6 col-sm-12\">\n          <label for=\"txtEdad\">EDAD</label>\n          <input type=\"number\" placeholder=\"Ingresar Edad . .\" [(ngModel)]=\"objPersona.edad\" class=\"form-control\"\n            id=\"txtEdad\">\n        </div>\n\n        <div class=\"col-lg-3 col-md-6\" col-sm-12>\n          <label for=\"txtFechaNac\">FECHA DE NACIMIENTO</label>\n          <input type=\"date\" [(ngModel)]=\"objPersona.fechaNacimiento\" class=\"form-control\" id=\"txtFechaNac\">\n        </div>\n      </div>\n      <div class=\"alert alert-danger mt-3\" *ngIf='objMessageAlert.showAlertErr'>\n        <strong>Alerta! </strong>{{objMessageAlert.messageErr}}\n      </div>\n\n      <div class=\"alert alert-success mt-3\" *ngIf='objMessageAlert.showAlertSuccess'>\n        <strong>CORRECTO! </strong>{{objMessageAlert.messageSuccess}}\n      </div>\n      <br>\n      <div class=\"row contentbutton\">\n        <div class=\"col-lg-3 col-md-0\"></div>\n        <div class=\"col-lg-2\">\n          <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"savePersonal()\">Registrar</button>\n        </div>\n        <div class=\"col-lg-2\">\n          <button type=\"button\" class=\"btn btn-success btn-block\" (click)=\"getPdf()\"> <i class=\"fa fa-pencil\"></i>\n            Descargar</button>\n        </div>\n\n        <div class=\"col-lg-2\">\n          <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"clearObjPersonal()\">Cancelar</button>\n        </div>\n\n        <div class=\"col-lg-3 col-md-0\"></div>\n      </div>\n      <br>\n\n      <div class=\"text-center\" *ngIf=\"loader\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n          <span class=\"sr-only\">Guardando ...</span>\n        </div>\n      </div>\n\n    </fieldset>\n    <br>\n    <br>\n    <hr class=\"my-4\">\n\n    <div class=\"tableStyle  \">\n      <legend>LISTA DE CLIENTES</legend>\n      <table class=\"table\" id=\"tblClientes\">\n        <thead>\n          <tr>\n            <th>Nombres</th>\n            <th class=\"text-center\">F. Nacimiento</th>\n            <th class=\"text-center\">F. Muerte</th>\n            <th>Edad</th>\n\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of listPerson;index as i\">\n            <td>{{item.nombre}} {{item.apellido}}</td>\n            <td class=\"text-center\">{{item.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>\n            <td class=\"text-center\">{{item.fechaMuerte | date: 'dd/MM/yyyy'}}</td>\n            <td>{{item.edad}}</td>\n\n          </tr>\n\n        </tbody>\n        <tfoot>\n          <tr>\n            <th></th>\n            <th></th>\n            <th class=\"text-center\">Promedio de Edad</th>\n            <th>{{promedioEdad.toFixed(2)}}</th>\n          </tr>\n          <tr>\n            <th></th>\n            <th></th>\n            <th class=\"text-center\">Desviacion Estandas</th>\n            <th>{{desviacionEstandar.toFixed(2)}}</th>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -95,6 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.min.js");
 /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -118,6 +121,12 @@ var AppComponent = /** @class */ (function () {
         this.loader = false;
         this.promedioEdad = 0;
         this.desviacionEstandar = 0;
+        this.objMessageAlert = {
+            showAlertErr: false,
+            showAlertSuccess: false,
+            messageErr: '',
+            messageSuccess: ''
+        };
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -142,8 +151,49 @@ var AppComponent = /** @class */ (function () {
             _this.desviacionEstandar = Math.sqrt(_this.desviacionEstandar / _this.listPerson.length);
         });
     };
+    AppComponent.prototype.validation = function () {
+        var _this = this;
+        // VALIDACI[ON DDE DATOS
+        if (this.objPersona.nombre.length == 0) {
+            this.objMessageAlert.showAlertErr = true;
+            this.objMessageAlert.messageErr = "Ingresar un nombre . . ";
+            setTimeout(function () {
+                _this.objMessageAlert.showAlertErr = false;
+            }, 1500);
+            return false;
+        }
+        else if (this.objPersona.apellido.length == 0) {
+            this.objMessageAlert.showAlertErr = true;
+            this.objMessageAlert.messageErr = "Ingresar un apellido . . ";
+            setTimeout(function () {
+                _this.objMessageAlert.showAlertErr = false;
+            }, 1500);
+            return false;
+        }
+        else if (this.objPersona.edad == 0) {
+            this.objMessageAlert.showAlertErr = true;
+            this.objMessageAlert.messageErr = "Ingresar edad . . ";
+            setTimeout(function () {
+                _this.objMessageAlert.showAlertErr = false;
+            }, 1500);
+            return false;
+        }
+        else if (this.objPersona.fechaNacimiento.length == 0) {
+            this.objMessageAlert.showAlertErr = true;
+            this.objMessageAlert.messageErr = "Ingresar un fecha de nacimiento . . ";
+            setTimeout(function () {
+                _this.objMessageAlert.showAlertErr = false;
+            }, 1500);
+            return false;
+        }
+        return true;
+        //
+    };
     AppComponent.prototype.savePersonal = function () {
         var _this = this;
+        if (!this.validation()) {
+            return;
+        }
         this.loader = true;
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
@@ -152,7 +202,12 @@ var AppComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.clearObjPersonal();
             _this.loader = false;
-        }, 1500);
+            _this.objMessageAlert.showAlertSuccess = true;
+            _this.objMessageAlert.messageSuccess = "Se ha registrado un nuevo cliente !! ";
+            setTimeout(function () {
+                _this.objMessageAlert.showAlertSuccess = false;
+            }, 1500);
+        }, 1000);
     };
     AppComponent.prototype.clearObjPersonal = function () {
         this.objPersona.apellido = '';
@@ -161,11 +216,9 @@ var AppComponent = /** @class */ (function () {
         this.objPersona.fechaNacimiento = '';
     };
     AppComponent.prototype.getPdf = function () {
-        var doc = new jspdf__WEBPACK_IMPORTED_MODULE_4__({
-            orientation: 'landscape'
-        });
-        doc.text('Hello world!', 1, 10);
-        doc.output('dataurlnewwindow');
+        var doc = new jspdf__WEBPACK_IMPORTED_MODULE_4__();
+        doc.autoTable({ html: '#tblClientes' });
+        doc.save('report.pdf');
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

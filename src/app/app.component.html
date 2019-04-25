@@ -32,18 +32,32 @@
           <input type="date" [(ngModel)]="objPersona.fechaNacimiento" class="form-control" id="txtFechaNac">
         </div>
       </div>
+      <div class="alert alert-danger mt-3" *ngIf='objMessageAlert.showAlertErr'>
+        <strong>Alerta! </strong>{{objMessageAlert.messageErr}}
+      </div>
+
+      <div class="alert alert-success mt-3" *ngIf='objMessageAlert.showAlertSuccess'>
+        <strong>CORRECTO! </strong>{{objMessageAlert.messageSuccess}}
+      </div>
       <br>
       <div class="row contentbutton">
         <div class="col-lg-3 col-md-0"></div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
           <button type="button" class="btn btn-danger btn-block" (click)="savePersonal()">Registrar</button>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
+          <button type="button" class="btn btn-success btn-block" (click)="getPdf()"> <i class="fa fa-pencil"></i>
+            Descargar</button>
+        </div>
+
+        <div class="col-lg-2">
           <button type="button" class="btn btn-info btn-block" (click)="clearObjPersonal()">Cancelar</button>
         </div>
+
         <div class="col-lg-3 col-md-0"></div>
       </div>
       <br>
+
       <div class="text-center" *ngIf="loader">
         <div class="spinner-border text-primary" role="status">
           <span class="sr-only">Guardando ...</span>
@@ -55,23 +69,21 @@
     <br>
     <hr class="my-4">
 
-    <div class="tableFilter">
+    <div class="tableStyle  ">
       <legend>LISTA DE CLIENTES</legend>
-      <table class="table">
+      <table class="table" id="tblClientes">
         <thead>
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col" class="text-center">F. Nacimiento</th>
-            <th scope="col" class="text-center">F. Muerte</th>
-            <th scope="col">Edad</th>
+            <th>Nombres</th>
+            <th class="text-center">F. Nacimiento</th>
+            <th class="text-center">F. Muerte</th>
+            <th>Edad</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of listPerson;index as i">
-            <td>{{item.nombre}}</td>
-            <td>{{item.apellido}}</td>
+            <td>{{item.nombre}} {{item.apellido}}</td>
             <td class="text-center">{{item.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>
             <td class="text-center">{{item.fechaMuerte | date: 'dd/MM/yyyy'}}</td>
             <td>{{item.edad}}</td>
@@ -81,25 +93,20 @@
         </tbody>
         <tfoot>
           <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col" class="text-center">Promedio de Edad</th>
-            <th scope="col">{{promedioEdad.toFixed(2)}}</th>
+            <th></th>
+            <th></th>
+            <th class="text-center">Promedio de Edad</th>
+            <th>{{promedioEdad.toFixed(2)}}</th>
           </tr>
           <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col" class="text-center">Desviacion Estandas</th>
-            <th scope="col">{{desviacionEstandar.toFixed(2)}}</th>
+            <th></th>
+            <th></th>
+            <th class="text-center">Desviacion Estandas</th>
+            <th>{{desviacionEstandar.toFixed(2)}}</th>
           </tr>
         </tfoot>
       </table>
     </div>
   </div>
 </div>
-<button (click)='getPdf()'>
-  GET PDF
-</button>
 <router-outlet></router-outlet>
