@@ -139,15 +139,18 @@ var AppComponent = /** @class */ (function () {
                 _this.listPerson.push(item.val());
             });
             _this.promedioEdad = _this.promedioEdad / _this.listPerson.length;
-            // FUNCION PARA GENERAR LA DESVIACION ESTANDAR
+            _this.desviacionEstandar = 0;
             _this.listPerson.forEach(function (res) {
+                // FUNCION PARA GENERAR LA DESVIACION ESTANDAR
                 _this.desviacionEstandar += (Math.pow(res.edad - _this.promedioEdad, 2));
                 // calculamos fecha promedio de vida
                 var fechaPromedioMuerte;
                 var fechaEdad = res.fechaNacimiento.split('-');
                 fechaPromedioMuerte = (parseFloat(fechaEdad[0]) + anioPromedioVida) + '-' + fechaEdad[1] + '-' + fechaEdad[2];
                 res['fechaMuerte'] = fechaPromedioMuerte;
+                //
             });
+            //
             _this.desviacionEstandar = Math.sqrt(_this.desviacionEstandar / _this.listPerson.length);
         });
     };

@@ -52,16 +52,18 @@ export class AppComponent {
         this.listPerson.push(item.val());
       });
       this.promedioEdad = this.promedioEdad / this.listPerson.length;
-      // FUNCION PARA GENERAR LA DESVIACION ESTANDAR
-
+      this.desviacionEstandar = 0;
       this.listPerson.forEach(res => {
+        // FUNCION PARA GENERAR LA DESVIACION ESTANDAR
         this.desviacionEstandar += (Math.pow(res.edad - this.promedioEdad, 2));
         // calculamos fecha promedio de vida
         var fechaPromedioMuerte;
         var fechaEdad = res.fechaNacimiento.split('-');
         fechaPromedioMuerte = (parseFloat(fechaEdad[0]) + anioPromedioVida) + '-' + fechaEdad[1] + '-' + fechaEdad[2];
         res['fechaMuerte'] = fechaPromedioMuerte;
+        //
       });
+      //
       this.desviacionEstandar = Math.sqrt(this.desviacionEstandar / this.listPerson.length)
 
     });
